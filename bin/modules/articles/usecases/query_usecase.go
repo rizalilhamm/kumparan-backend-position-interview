@@ -34,7 +34,6 @@ func NewArticleQueryUsecase(command repositories.DbCommandInterface, query repos
 func (c *ArticleQueryUsecase) GetList(ctx context.Context, filtered map[string]any) (result utils.Result) {
 	QueryPy := &repositories.QueryPayload{
 		Table: "articles",
-		Query: "SELECT * FROM articles",
 		Where: filtered,
 	}
 

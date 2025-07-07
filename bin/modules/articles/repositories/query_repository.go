@@ -41,14 +41,6 @@ func (c *PostgreQuery) GetList(payload *QueryPayload) <-chan utils.Result {
 
 		var query = c.db.Table(payload.Table)
 
-		if payload.Select != "" {
-			query = query.Select(payload.Select)
-		}
-
-		if payload.Join != "" {
-			query = query.Joins(payload.Join)
-		}
-
 		if payload.Where != nil {
 			query = query.Where(payload.Where)
 		}
@@ -77,19 +69,6 @@ func (c *PostgreQuery) Search(payload *QueryPayload) <-chan utils.Result {
 		// Apply SELECT
 		if payload.Select != "" {
 			query = query.Select(payload.Select)
-		}
-
-		// Apply WHERE map
-		if payload.Where != nil {
-			query = query.Where(payload.Where)
-		}
-
-		// Apply LIMIT & OFFSET
-		if payload.Limit > 0 {
-			query = query.Limit(payload.Limit)
-		}
-		if payload.Offset > 0 {
-			query = query.Offset(payload.Offset)
 		}
 
 		// Prepare LIKE conditions if title/body present
